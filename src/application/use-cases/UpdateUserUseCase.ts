@@ -1,6 +1,6 @@
 import { IUserRepository } from "../../domain/repository/IUserRepository";
 import { User } from "../../domain/entity/User";
-import { EditUserDTO } from "../dtos/EditUserDTO copy";
+import { EditUserDTO } from "../dtos/EditUserDTO ";
 
 export class UpdateUserUseCase {
 
