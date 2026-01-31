@@ -17,60 +17,60 @@ export class UserController {
         this.repository = new UserRepositoryInMemory();
     }
 
-  getAllUsers(req: Request , res: Response) {
+  async getAllUsers(req: Request , res: Response) {
     const useCase = new GetAllUsersUseCase(this.repository);
-    const users = useCase.execute();
+    const users = await useCase.execute();
     res.json({ data: users });
   }
 
-  createUser(req: Request , res: Response) {
+  async createUser(req: Request , res: Response) {
     const useCase = new CreateUserUseCase(this.repository);
     const dto = new CreateUserDTO(
         req.body.name,
         req.body.email,
         req.body.password);
-    const user = useCase.execute(dto);
+    const user = await useCase.execute(dto);
     res.status(201).json({ data: user });
   }
 
-  getUserById(req: Request , res: Response) {
+  async getUserById(req: Request , res: Response) {
     const { id } = req.params;
     if(!this.validateId(id, res)) {
       return;
     }
     const useCase = new FindUserByIdUseCase(this.repository);
-    const user = useCase.execute(id);
+    const user = await useCase.execute(id);
     res.json({ data: user });  
   }
 
-  getUserByEmail(req: Request , res: Response) {
+  async getUserByEmail(req: Request , res: Response) {
     const { email } = req.params;
         if(!this.validateEmail(email, res)) {
       return;
     }
     const useCase = new FindUserByEmailUseCase(this.repository);
-    const user = useCase.execute(email);
+    const user = await useCase.execute(email);
     res.json({ data: user });
   }
 
-  updateUser(req: Request , res: Response) {
+  async updateUser(req: Request , res: Response) {
     const { id } = req.params;
     const useCase = new UpdateUserUseCase(this.repository);
     const dto = new EditUserDTO(
         req.body.name,
         req.body.email,
         req.body.password);
-    const user = useCase.execute(dto);
+    const user = await useCase.execute(dto);
     res.json({ data: user });
   }
 
-  deleteUser(req: Request , res: Response) {
+  async deleteUser(req: Request , res: Response) {
     const { id } = req.params;
     if(!this.validateId(id, res)) {
       return;
     }
     const useCase = new DeleteUserUseCase(this.repository);
-    useCase.execute(id);
+    await useCase.execute(id);
     res.json({ message: `delete user with id ${id}...` });
   }
 
