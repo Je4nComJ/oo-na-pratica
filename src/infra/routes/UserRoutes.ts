@@ -15,7 +15,7 @@ export function createUserRoutes(): Router {
   router.get("/:id", (req, res) => {
     userController.getUserById(req, res);
   });
-  router.get("/:email", (req, res) => {
+  router.get("/email/:email", (req, res) => {
     userController.getUserByEmail(req, res);
   });
   router.put("/:id", (req, res) => {
