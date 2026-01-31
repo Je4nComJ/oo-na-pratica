@@ -55,11 +55,14 @@ export class UserController {
 
   async updateUser(req: Request , res: Response) {
     const { id } = req.params;
+    if(!this.validateId(id, res)) {
+      return;
+    }
     const useCase = new UpdateUserUseCase(this.repository);
     const dto = new EditUserDTO(
+        id,
         req.body.name,
-        req.body.email,
-        req.body.password);
+        req.body.email);
     const user = await useCase.execute(dto);
     res.json({ data: user });
   }
