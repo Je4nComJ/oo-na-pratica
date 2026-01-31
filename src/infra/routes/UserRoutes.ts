@@ -1,25 +1,28 @@
+import { UserController } from './../controllers/UserController';
 import { Router } from "express";
 
 export function createUserRoutes(): Router {
   const router = Router();
 
+  const userController = new UserController();
+
   router.get("/", (req, res) => {
-    res.json({ message: "users..." });
+    userController.getAllUsers(req, res);
   });
   router.post("/", (req, res) => {
-    res.json({ message: "create user..." });
+    userController.createUser(req, res);
   });
   router.get("/:id", (req, res) => {
-    res.json({ message: `get user with id ${req.params.id}...` });
+    userController.getUserById(req, res);
   });
   router.get("/:email", (req, res) => {
-    res.json({ message: `get user with email ${req.params.email}...` });
+    userController.getUserByEmail(req, res);
   });
   router.put("/:id", (req, res) => {
-    res.json({ message: `update user with id ${req.params.id}...` });
+    userController.updateUser(req, res);
   });
   router.delete("/:id", (req, res) => {
-    res.json({ message: `delete user with id ${req.params.id}...` });
+    userController.deleteUser(req, res);
   });
 
   return router;

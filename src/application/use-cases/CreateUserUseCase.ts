@@ -9,7 +9,7 @@ export class CreateUserUseCase {
     async execute(dto: CreateUserDTO): Promise<User> {
         
         const user = new User(
-            dto.id, 
+            this.repository.generateId(),
             dto.name, 
             dto.email, 
             dto.password

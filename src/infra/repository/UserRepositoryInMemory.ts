@@ -39,4 +39,8 @@ export class UserRepositoryInMemory implements IUserRepository {
         this.users.splice(index, 1);
         return true;
     }
+
+    generateId(): string {
+        return (this.users.length + 1).toString();
+    }
 }

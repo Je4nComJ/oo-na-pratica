@@ -7,4 +7,5 @@ export interface IUserRepository {
     findAll(): Promise<User[]>;
     update(user: User): Promise<boolean>;
     delete(id: string): Promise<boolean>;
+    generateId(): string;
 }
